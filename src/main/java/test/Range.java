@@ -13,7 +13,7 @@ public class Range {
 
     public Range(long left, long right) {
         if(left>right){
-            throw new IllegalArgumentException("tak nel'zya >:c");
+            throw new IllegalArgumentException();
         }
         this.left = left;
         this.right = right;
