@@ -52,24 +52,31 @@ public class Range {
     }
 
     public Iterator<Long> asIterator(){
-        final List<Long> rangeList = this.asList();
-        Iterator<Long> iter = new Iterator<Long>() {
-            public boolean hasNext() {
-                return !(rangeList.size()==listIndex);
-            }
-            public Long next() {
-                if(hasNext()){
-                    return rangeList.get(listIndex++);
-                }
-                else{
-                    throw new NoSuchElementException();
-                }
-            }
-            public void remove() {
+        return new RangeIterator(this.asList());
+    }
 
+    class RangeIterator implements Iterator<Long>{
+
+        final List<Long> rangeList;
+
+        RangeIterator(List<Long> rangeList) {
+            this.rangeList = rangeList;
+        }
+
+        public boolean hasNext() {
+            return !(rangeList.size()==listIndex);
+        }
+        public Long next() {
+            if(hasNext()){
+                return rangeList.get(listIndex++);
             }
-        };
-        return iter;
+            else{
+                throw new NoSuchElementException();
+            }
+        }
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
     }
 
 
